@@ -1,13 +1,24 @@
 import React, {useEffect, useState} from 'react';
-import { AppBar, Grid } from '@mui/material';
-import { ErrorMessage, Field, Form, Formik } from 'formik';
+import { AppBar, FormGroup, Grid } from '@mui/material';
+import { ErrorMessage, Field, Form, Formik, FormikValues } from 'formik';
 import { useFormik } from 'formik';
+import './App.css';
 import {CatImageService} from "./service/CatImageService";
 
 type Card = {
     name : string,
     imageUrl : string
 }
+
+const validateForm = (values: FormikValues) => {
+  const errors: { name?: string } = {};
+
+  if (!values.name) {
+    errors.name = 'Please provide a name';
+  }
+
+  return errors;
+};
 
 const RandomCatForm = ({onSubmit}: {onSubmit: (card: any) => void}) => {
     const [catImageUrl, setCatImageUrl] = useState();
@@ -22,9 +33,7 @@ const RandomCatForm = ({onSubmit}: {onSubmit: (card: any) => void}) => {
             imageUrl: '',
           },
 
-          validate: values =>{
-            
-          },
+          validate: validateForm,
       onSubmit: values => {
         const card = {
           name: values.name,
@@ -34,6 +43,7 @@ const RandomCatForm = ({onSubmit}: {onSubmit: (card: any) => void}) => {
       }
     });
     return (
+      <FormGroup>
         <form onSubmit={formik.handleSubmit}>
           <label htmlFor="name">name</label>
           <input
@@ -44,7 +54,10 @@ const RandomCatForm = ({onSubmit}: {onSubmit: (card: any) => void}) => {
             value={formik.values.name}
           />
           <button type="submit">Submit</button>
+          <p className='error'>
+          {formik.errors.name && formik.touched.name? <div>{formik.errors.name}</div> : null}</p>
         </form>
+        </FormGroup>
       );
   };
 

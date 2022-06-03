@@ -1,3 +1,8 @@
+// @ts-ignore
+// @ts-ignore
+// @ts-ignore
+// @ts-ignore
+
 import * as React from 'react';
 import { styled, alpha } from '@mui/material/styles';
 import AppBar from '@mui/material/AppBar';
@@ -17,21 +22,13 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import {Button} from "@mui/material";
 import {useEffect, useState} from "react";
-import "./GetAllCarsService"
-import GetAllCarsService from "./GetAllCarsService";
+import DataService from "./Serices/DataService";
+import CarList from "./CarList"
+import RegisterForm from "./RegisterForm";
+import Register from "./Register"
+import Login from "./Login"
+import {BrowserRouter, Route, Routes} from "react-router-dom";
 
-type Car = {
-    Name : string,
-    Miles_per_Gallon : number,
-    Cylinders : number,
-    Displacement : number,
-    Horsepower : number,
-    Weight_in_lbs : number,
-    Acceleration : number,
-    Year : string,
-    Origin : string,
-    id : number
-}
 
 const Search = styled('div')(({ theme }) => ({
     position: 'relative',
@@ -83,7 +80,6 @@ export default function PrimarySearchAppBar() {
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-    const [carData, setCarData] = useState([])
 
     const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
@@ -92,6 +88,8 @@ export default function PrimarySearchAppBar() {
     const handleMobileMenuClose = () => {
         setMobileMoreAnchorEl(null);
     };
+
+
 
     const handleMenuClose = () => {
         setAnchorEl(null);
@@ -102,10 +100,40 @@ export default function PrimarySearchAppBar() {
         setMobileMoreAnchorEl(event.currentTarget);
     };
 
+    const [showRegister, setShowRegister] = useState(false);
+    const [showLogIn, setShowLogIn] = useState(false)
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    const [token, setToken] = useState<string | null>()
+
     useEffect(() => {
-        GetAllCarsService().getAllCars().then((allCarData) => setCarData(allCarData.data))
-        console.log(carData)
-    }, [carData])
+
+    });
+
+
+    const handleLogout = () => {
+        handleMenuClose()
+        setIsLoggedIn(false)
+        localStorage.setItem("token", '')
+    }
+
+    const handleLogin = () => {
+        setIsLoggedIn(false);
+        setShowRegister(false)
+        setShowLogIn(true);
+    }
+
+    const handleChange = (data : boolean) => {
+        setIsLoggedIn(data)
+        setShowLogIn(false)
+    }
+
+    const handleRegister = () => {
+        setShowLogIn(false)
+        setIsLoggedIn(false);
+        setShowRegister(true);
+    }
+
 
     const menuId = 'primary-search-account-menu';
     const renderMenu = (
@@ -124,8 +152,7 @@ export default function PrimarySearchAppBar() {
             open={isMenuOpen}
             onClose={handleMenuClose}
         >
-            <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-            <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+            <MenuItem onClick={handleLogout}>Log out</MenuItem>
         </Menu>
     );
 
@@ -162,7 +189,6 @@ export default function PrimarySearchAppBar() {
         </Menu>
     );
 
-    const isLoggedIn = true;
 
     return (
         <Box sx={{ flexGrow: 1 }}>
@@ -209,7 +235,11 @@ export default function PrimarySearchAppBar() {
                             <AccountCircle />
                         </IconButton>
                     </Box>
-                        : <Button color="inherit">Login</Button>}
+                        : <div>
+                            <Button color="inherit" onClick={handleLogin}>Login</Button>
+                            <Button color="inherit" onClick={handleRegister}>register</Button>
+                        </div>
+                            }
 
                     <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
                         <IconButton
@@ -227,21 +257,17 @@ export default function PrimarySearchAppBar() {
             </AppBar>
             {renderMobileMenu}
             {renderMenu}
-            <div>
-                {carData.map((car) => {
-                    return (
-                        <div className={"table"}>
-                            <div>
-                                <table className={"dataResult"}>
-                                    <tr className="list-group-items">
-                                        <td>{car.Name}</td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                    )
-                })}
-            </div>
+
+            <BrowserRouter>
+                <Routes>
+                    <Route path={""}/>
+                    <Route path={"/CarList"} element={<CarList token={localStorage.getItem("token")}/>}/>
+                </Routes>
+            </BrowserRouter>
+
+            {showRegister ? <Register/> : null}
+            {showLogIn ? <Login onChange={handleChange}/> : null}
+
         </Box>
     );
 }

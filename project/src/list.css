@@ -1,0 +1,15 @@
+.inlineCar{
+    display: inline-block;
+    min-height: 100px;
+    max-width: 80%;
+}
+
+.card {
+    padding: 8px;
+    background-color: darkorange;
+    margin: 20px;
+    text-align: left;
+    min-width: 330px;
+    max-width: 300px;
+    max-height: 170px;
+}

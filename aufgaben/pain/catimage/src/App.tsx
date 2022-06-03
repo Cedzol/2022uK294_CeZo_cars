@@ -1,52 +1,31 @@
-import { AppBar, Grid } from '@mui/material';
+import { AppBar, Grid, Link } from '@mui/material';
 import { Box, Container } from '@mui/system';
 import React, {useEffect, useState} from 'react';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
 import RandomCatForm from './RandomCatForm';
+import RandomCatList from './RandomCatList';
 import {CatImageService} from "./service/CatImageService";
+import HomePage from './pages/HomePage';
+import RandomCatPage from './pages/RandomCatPage';
 
 
 function App() {
-  type Card = {
-    name : string,
-    imageUrl : string
-}
 
-  const [cards, setCards] = useState<Card[]>([])
-
-  const handleRandomCatFormSubmit = (myShinyNewCard: Card) => {
-    setCards((cards) => [...cards, myShinyNewCard]);
-  
-  };
-
-  const [CatImageUrl, setCatImageUrl] = useState();
-  useEffect(() => {
-    CatImageService().getRandomCatImage()
-        .then((catImageUrl) => setCatImageUrl(catImageUrl));
-  }, [])
   return (
       <Box>
         <Container>
           <AppBar>
+            <Link href="/home">Home</Link>
+            <Link href="/cats">Cats</Link>
           </AppBar>
-          <RandomCatForm onSubmit={handleRandomCatFormSubmit} />
-          <div>
-                {cards.map((card) => {
-                    return (
-                        <div className={"table"}>
-                            <div>
-                                <table className={"dataResult"}>
-                                    <tr className="list-group-items">
-                                        <td>{card.name}</td>
-                                        <td><img src={card.imageUrl}></img></td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </div>
-                    )
-                })}
-            </div>
-        
+          <BrowserRouter>
+              <Routes>
+                <Route path='/' element={<HomePage/>}/>
+                <Route path='/home' element={<HomePage/>}/>
+                <Route path='/cats' element={<RandomCatPage/>}/>
+              </Routes>
+          </BrowserRouter>
         </Container>
       </Box>
   );
