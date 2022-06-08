@@ -2,8 +2,12 @@ import * as React from "react";
 import {useEffect, useState} from "react";
 import DataService from "./Serices/DataService";
 import "./list.css"
+import LoginService from "./Serices/LoginService";
+import PrimarySearchAppBar from "./PrimarySearchAppBar";
+import {Link} from "react-router-dom";
 
-const CarList = ({token}: {token: string | null}) => {
+const CarList = () => {
+
     type Car = {
         Name : string,
         Miles_per_Gallon : number,
@@ -18,35 +22,37 @@ const CarList = ({token}: {token: string | null}) => {
     }
 
     const [carData, setCarData] = useState([])
+    const getToken = () => {
+        return localStorage.getItem("token")
+    }
+
 
     useEffect(() => {
-        DataService(token).getAllCars().then((allCarData) => setCarData(allCarData.data))
-        console.log(carData)
+        const tok = getToken();
+        DataService(tok).getAllCars().then((allCarData) => setCarData(allCarData.data))
+
     }, [carData])
+
+
 
     return (
         <div>
-            {carData.map((car : Car) => {
+            <PrimarySearchAppBar/>
+            {carData.map((car : Car, i : number) => {
                 return (<div className={"inlineCar"}>
                         <div className="card">
-                            <table>
-                                <tr>
-                                    <td>
-                                        <b>Name:</b>
-                                    </td>
-                                    <td>
-                                        <p>{car.Name}</p>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td><b>Id:</b></td>
-                                    <td><p>{car.id}</p></td>
-                                </tr>
-                                <tr>
-                                    <td><b>Year:</b></td>
-                                    <td><p>{car.Year}</p></td>
-                                </tr>
-                            </table>
+                                <div key={i}>
+                                    <b>Name:</b>
+                                    <p >{car.Name}</p>
+
+                                    <b >Id:</b>
+                                    <p >{car.id}</p>
+
+                                    <b >Year:</b>
+                                    <p >{car.Year}</p>
+
+                                    <Link to={`/cars/${car.id}`}>Details</Link>
+                                </div>
                         </div>
                     </div>
                 )

@@ -27,7 +27,7 @@ import CarList from "./CarList"
 import RegisterForm from "./RegisterForm";
 import Register from "./Register"
 import Login from "./Login"
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {BrowserRouter, Route, Routes, useNavigate} from "react-router-dom";
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -100,21 +100,22 @@ export default function PrimarySearchAppBar() {
         setMobileMoreAnchorEl(event.currentTarget);
     };
 
+    let initLogIn : boolean = (localStorage.getItem("log") == 'true')
+
     const [showRegister, setShowRegister] = useState(false);
     const [showLogIn, setShowLogIn] = useState(false)
-    const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoggedIn, setIsLoggedIn] = useState(initLogIn);
 
-    const [token, setToken] = useState<string | null>()
+    const navigate = useNavigate();
 
-    useEffect(() => {
-
-    });
 
 
     const handleLogout = () => {
         handleMenuClose()
-        setIsLoggedIn(false)
+        localStorage.setItem("log", "false")
         localStorage.setItem("token", '')
+        setIsLoggedIn(false)
+        navigate("/")
     }
 
     const handleLogin = () => {
@@ -126,6 +127,7 @@ export default function PrimarySearchAppBar() {
     const handleChange = (data : boolean) => {
         setIsLoggedIn(data)
         setShowLogIn(false)
+        setShowRegister(false)
     }
 
     const handleRegister = () => {
@@ -258,12 +260,6 @@ export default function PrimarySearchAppBar() {
             {renderMobileMenu}
             {renderMenu}
 
-            <BrowserRouter>
-                <Routes>
-                    <Route path={""}/>
-                    <Route path={"/CarList"} element={<CarList token={localStorage.getItem("token")}/>}/>
-                </Routes>
-            </BrowserRouter>
 
             {showRegister ? <Register/> : null}
             {showLogIn ? <Login onChange={handleChange}/> : null}

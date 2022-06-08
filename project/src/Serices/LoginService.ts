@@ -1,5 +1,6 @@
 import axios, {AxiosInstance} from "axios";
 import {defaultAxiosInstance} from "../Api"
+import {useNavigate} from "react-router-dom";
 
 type User = {
     email : string,
@@ -8,7 +9,7 @@ type User = {
 
 const LoginService = (api: AxiosInstance = defaultAxiosInstance) => ({
 
-    loginUser: (user : User) => {
+    loginUser: async (user : User) => {
         console.log(user)
         api.post('/login', {
             email: user.email,
@@ -16,6 +17,7 @@ const LoginService = (api: AxiosInstance = defaultAxiosInstance) => ({
         })
             .then(function (response) {
                 localStorage.setItem("token", response.data.accessToken)
+                localStorage.setItem("log", "true")
                 console.log(response.data.accessToken);
             })
             .catch(function (error) {

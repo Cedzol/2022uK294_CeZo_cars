@@ -1,0 +1,43 @@
+.detailCard {
+    padding: 8px;
+    background-color: darkorange;
+    margin: 20px;
+    text-align: left;
+    min-width: 330px;
+
+    max-height: 500px;
+}
+
+.editCard {
+    padding: 8px;
+    background-color: darkorange;
+    margin: 20px;
+    text-align: left;
+    min-width: 580px;
+
+    max-height: 500px;
+}
+
+.details{
+    min-width: 270px;
+}
+
+.form{
+    max-width: 350px;
+}
+
+.inline {
+    padding-right: 40px;
+}
+
+.center {
+    padding-left: 30px;
+}
+
+.edit {
+    background-color: #61dafb;
+}
+
+.back {
+    background-color: crimson;
+}

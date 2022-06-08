@@ -8,7 +8,7 @@ type User = {
 
 const RegisterService = (api: AxiosInstance = defaultAxiosInstance) => ({
 
-    registerUser: (user : User) => {
+    registerUser: async (user : User) => {
         console.log(user)
         api.post('/register', {
             email: user.email,

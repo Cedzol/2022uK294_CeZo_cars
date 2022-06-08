@@ -10,11 +10,12 @@ type User = {
 
 const Login = (props : any) => {
 
-
+const navigate = useNavigate();
 
     function handleLoginSubmit(user : User) {
-        LoginService().loginUser(user);
+        LoginService().loginUser(user).then(() => navigate("/cars"));
         props.onChange(true);
+
     }
 
     return (

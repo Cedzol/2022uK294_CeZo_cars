@@ -3,12 +3,6 @@ import { AppBar, FormGroup, Grid } from '@mui/material';
 import {FormikValues, useFormik} from "formik";
 
 
-
-type User = {
-    email : string,
-    password : string
-}
-
 const validateForm = (values: FormikValues) => {
     const errors: { email?: string, password? : string } = {};
 

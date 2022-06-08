@@ -1,5 +1,6 @@
 import RegisterService from "./Serices/RegisterService";
 import RegisterForm from "./RegisterForm";
+import {useNavigate} from "react-router-dom";
 
 type User = {
     email : string,
@@ -7,8 +8,10 @@ type User = {
 }
 
 const Register = () => {
+    const navigate = useNavigate();
     const handleRegisterSubmit = (newUser : User) => {
-        RegisterService().registerUser(newUser)
+        RegisterService().registerUser(newUser).then(() => navigate("/cars"));
+        localStorage.setItem("log", "true");
     }
 
     return (
