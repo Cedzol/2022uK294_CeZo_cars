@@ -24,10 +24,6 @@ const CarList = () => {
     let [filteredData, setFilteredData] = useState([])
     const navigate = useNavigate();
 
-    const getToken = () => {
-        return localStorage.getItem("token")
-    }
-
     const handleFilter = (event: any) => {
         const searchWord = event.target.value.toLowerCase();
         let newFilter = carData.filter((value) => {
@@ -41,8 +37,7 @@ const CarList = () => {
     }
 
     useEffect(() => {
-        const tok = getToken();
-        DataService(tok).getAllCars().then((allCarData) => setCarData(allCarData.data))
+        DataService(localStorage.getItem("token")).getAllCars().then((allCarData) => setCarData(allCarData.data))
 
     }, [carData])
 
@@ -60,12 +55,15 @@ const CarList = () => {
             <PrimarySearchAppBar/>
             <div className={"pad"}>
                 {carData.length > 0 ?
-                    <button className={"create"} onClick={() => handleCreate()}>Create Car</button> : null}
-                <div className={"inline"}></div>
-                <div className={"inline"}>
-                    <label>Search: </label>
-                    <input type="text" onChange={handleFilter}/>
-                </div>
+                    <div>
+                        <button className={"create"} onClick={() => handleCreate()}>Create Car</button>
+                        <div className={"inline"}></div>
+                            <div className={"inline"}>
+                                <label>Search: </label>
+                                <input type="text" onChange={handleFilter}/>
+                            </div>
+                        </div>
+                    : null}
             </div>
             {carData.length == 0 ? <p>Try reloading or login in again</p> : null}
             {filteredData.map((car: Car, i: number) => {

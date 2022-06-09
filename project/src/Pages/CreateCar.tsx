@@ -23,7 +23,7 @@ const CreateCar = () => {
     const handleCarSubmit = (newCar: Car) => {
         console.log(newCar)
         DataService(localStorage.getItem("token")).postCar(newCar).then(() =>
-            navigate("/cars/" + newCar.id)
+            navigate("/cars")
         )
         localStorage.setItem("log", "true");
     }
