@@ -41,3 +41,17 @@
 .back {
     background-color: crimson;
 }
+
+.delete {
+    background-color: crimson;
+    color: #282c34;
+    border: black;
+    min-width: 60px;
+    min-height: 30px;
+}
+
+.delete:hover {
+    background-color: red;
+    color: black;
+}
+

@@ -48,6 +48,10 @@ function Edit () {
         DataService(localStorage.getItem("token")).updateCar(car).then(() => navigate("/cars/" + car.id));
     }
 
+    function handleDelete(car : Car) {
+        DataService(localStorage.getItem("token")).deleteCar(car).then(() => navigate("/cars"));
+    }
+
     return (
         
         <div>
@@ -84,7 +88,13 @@ function Edit () {
                                         <UpdateCar onSubmit={handleUpdate}/>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>
+                                        <button className={"delete"} onClick={()=> handleDelete(detail)}>Delete</button>
+                                    </td>
+                                </tr>
                             </table>
+
                         </div>
                     </div>
                 </div>

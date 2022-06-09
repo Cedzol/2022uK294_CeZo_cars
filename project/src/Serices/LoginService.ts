@@ -16,6 +16,7 @@ const LoginService = (api: AxiosInstance = defaultAxiosInstance) => ({
             password: user.password
         })
             .then(function (response) {
+                localStorage.setItem("token", '')
                 localStorage.setItem("token", response.data.accessToken)
                 localStorage.setItem("log", "true")
                 console.log(response.data.accessToken);
