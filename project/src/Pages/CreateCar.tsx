@@ -1,7 +1,7 @@
 import * as React from "react";
-import PrimarySearchAppBar from "./PrimarySearchAppBar";
-import CreateCarForm from "./CreateCarForm";
-import DataService from "./Serices/DataService";
+import PrimarySearchAppBar from "../Organism/PrimarySearchAppBar";
+import CreateCarForm from "../Organism/CreateCarForm";
+import DataService from "../Services/DataService";
 import {useNavigate} from "react-router-dom";
 
 type Car = {

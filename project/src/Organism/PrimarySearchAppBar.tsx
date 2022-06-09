@@ -10,10 +10,10 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import {Button} from "@mui/material";
 import {useEffect, useState} from "react";
-import Register from "./Register"
-import Login from "./Login"
+import Register from "../Molecules/Register"
+import Login from "../Molecules/Login"
 import {useNavigate} from "react-router-dom";
-import "./Nav.css"
+import "../StyleSheets/Nav.css"
 
 
 export default function PrimarySearchAppBar() {

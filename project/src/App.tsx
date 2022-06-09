@@ -1,12 +1,12 @@
 
-import './App.css';
-import PrimarySearchAppBar from "./PrimarySearchAppBar";
+import './StyleSheets/App.css';
+import PrimarySearchAppBar from "./Organism/PrimarySearchAppBar";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import CarList from "./CarList";
+import CarList from "./Pages/CarList";
 import * as React from "react";
-import CarDetail from "./CarDetail";
-import Edit from "./Edit";
-import CreateCar from "./CreateCar";
+import CarDetail from "./Pages/CarDetail";
+import Edit from "./Pages/Edit";
+import CreateCar from "./Pages/CreateCar";
 
 
 function App() {

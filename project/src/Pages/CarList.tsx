@@ -1,8 +1,8 @@
 import * as React from "react";
 import {useEffect, useState} from "react";
-import DataService from "./Serices/DataService";
-import "./list.css"
-import PrimarySearchAppBar from "./PrimarySearchAppBar";
+import DataService from "../Services/DataService";
+import "../StyleSheets/list.css"
+import PrimarySearchAppBar from "../Organism/PrimarySearchAppBar";
 import {useNavigate} from "react-router-dom";
 
 const CarList = () => {
@@ -62,8 +62,10 @@ const CarList = () => {
             <div className={"pad"}>
                 {carData.length > 0 ? <button className={"create"} onClick={() => handleCreate()}>Create Car</button>: null}
                 <div className={"inline"}></div>
-                <label>Search: </label>
-                <input type="text" onChange={handleFilter}/>
+                <div className={"inline"}>
+                    <label>Search: </label>
+                    <input type="text" onChange={handleFilter}/>
+                </div>
             </div>
             {carData.length == 0? <p>Try reloading or login in again</p> : null}
             {filteredData.map((car : Car, i : number) => {

@@ -1,5 +1,5 @@
-import LoginForm from "./LoginForm";
-import LoginService from "./Serices/LoginService";
+import LoginForm from "../LoginForm";
+import LoginService from "../Services/LoginService";
 import {useNavigate} from "react-router-dom";
 
 type User = {

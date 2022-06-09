@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react';
 import { FormGroup} from '@mui/material';
 import {FormikValues, useFormik} from "formik";
 import {useParams} from "react-router-dom";
-import DataService from "./Serices/DataService";
-import "./Crude.css"
+import DataService from "../Services/DataService";
+import "../StyleSheets/Crude.css"
 
 
 type Car = {

@@ -1,5 +1,5 @@
-import RegisterService from "./Serices/RegisterService";
-import RegisterForm from "./RegisterForm";
+import RegisterService from "../Services/RegisterService";
+import RegisterForm from "../Organism/RegisterForm";
 import {useNavigate} from "react-router-dom";
 
 type User = {

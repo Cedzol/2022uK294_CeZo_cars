@@ -1,9 +1,9 @@
 import * as React from "react";
 import {useEffect, useState} from "react";
-import DataService from "./Serices/DataService";
+import DataService from "../Services/DataService";
 import {useNavigate, useParams} from "react-router-dom";
-import PrimarySearchAppBar from "./PrimarySearchAppBar";
-import "./Details.css"
+import PrimarySearchAppBar from "../Organism/PrimarySearchAppBar";
+import "../StyleSheets/Details.css"
 
 type Car = {
     Name: string,

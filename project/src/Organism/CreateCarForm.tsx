@@ -1,7 +1,7 @@
 import React from 'react';
 import { FormGroup } from '@mui/material';
 import {FormikValues, useFormik} from "formik";
-import "./Crude.css"
+import "../StyleSheets/Crude.css"
 import {useNavigate} from "react-router-dom";
 
 
