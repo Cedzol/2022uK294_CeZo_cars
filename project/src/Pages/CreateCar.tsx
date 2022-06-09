@@ -5,22 +5,22 @@ import DataService from "../Services/DataService";
 import {useNavigate} from "react-router-dom";
 
 type Car = {
-    Name : string,
-    Miles_per_Gallon : number,
-    Cylinders : number,
-    Displacement : number,
-    Horsepower : number,
-    Weight_in_lbs : number,
-    Acceleration : number,
-    Year : string,
-    Origin : string,
-    id : number
+    Name: string,
+    Miles_per_Gallon: number,
+    Cylinders: number,
+    Displacement: number,
+    Horsepower: number,
+    Weight_in_lbs: number,
+    Acceleration: number,
+    Year: string,
+    Origin: string,
+    id: number
 }
 
 const CreateCar = () => {
     const navigate = useNavigate();
 
-    const handleCarSubmit = (newCar : Car) => {
+    const handleCarSubmit = (newCar: Car) => {
         console.log(newCar)
         DataService(localStorage.getItem("token")).postCar(newCar).then(() =>
             navigate("/cars/" + newCar.id)
@@ -29,8 +29,8 @@ const CreateCar = () => {
     }
     return (
         <div>
-        <PrimarySearchAppBar/>
-        <CreateCarForm onSubmit={handleCarSubmit}/>
+            <PrimarySearchAppBar/>
+            <CreateCarForm onSubmit={handleCarSubmit}/>
         </div>
     )
 }

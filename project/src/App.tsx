@@ -1,4 +1,3 @@
-
 import './StyleSheets/App.css';
 import PrimarySearchAppBar from "./Organism/PrimarySearchAppBar";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
@@ -11,20 +10,19 @@ import CreateCar from "./Pages/CreateCar";
 
 function App() {
 
-  return (
-    <div className="App">
-
-        <BrowserRouter>
-            <Routes>
-                <Route path={"/"} element={<PrimarySearchAppBar/>}/>
-                <Route path={"/cars"} element={<CarList/>}/>
-                <Route path={"/cars/:id"} element={<CarDetail/>}/>
-                <Route path={"/cars/edit/:id"} element={<Edit/>}/>
-                <Route path={"/car"} element={<CreateCar/>}/>
-            </Routes>
-        </BrowserRouter>
-    </div>
-  );
+    return (
+        <div className="App">
+            <BrowserRouter>
+                <Routes>
+                    <Route path={"/"} element={<PrimarySearchAppBar/>}/>
+                    <Route path={"/cars"} element={<CarList/>}/>
+                    <Route path={"/cars/:id"} element={<CarDetail/>}/>
+                    <Route path={"/cars/edit/:id"} element={<Edit/>}/>
+                    <Route path={"/car"} element={<CreateCar/>}/>
+                </Routes>
+            </BrowserRouter>
+        </div>
+    );
 }
 
 export default App;

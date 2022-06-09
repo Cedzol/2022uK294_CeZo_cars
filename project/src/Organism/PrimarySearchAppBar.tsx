@@ -15,14 +15,18 @@ import Login from "../Molecules/Login"
 import {useNavigate} from "react-router-dom";
 import "../StyleSheets/Nav.css"
 
-
 export default function PrimarySearchAppBar() {
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
-        React.useState<null | HTMLElement>(null);
 
+
+    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+    const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
     const isMenuOpen = Boolean(anchorEl);
     const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
+    let initLogIn: boolean = (localStorage.getItem("log") == 'true')
+    const [showRegister, setShowRegister] = useState(false);
+    const [showLogIn, setShowLogIn] = useState(false)
+    const [isLoggedIn, setIsLoggedIn] = useState(initLogIn);
+    const navigate = useNavigate();
 
 
     const handleProfileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
@@ -34,7 +38,6 @@ export default function PrimarySearchAppBar() {
     };
 
 
-
     const handleMenuClose = () => {
         setAnchorEl(null);
         handleMobileMenuClose();
@@ -43,16 +46,6 @@ export default function PrimarySearchAppBar() {
     const handleMobileMenuOpen = (event: React.MouseEvent<HTMLElement>) => {
         setMobileMoreAnchorEl(event.currentTarget);
     };
-
-    let initLogIn : boolean = (localStorage.getItem("log") == 'true')
-
-    const [showRegister, setShowRegister] = useState(false);
-    const [showLogIn, setShowLogIn] = useState(false)
-    const [isLoggedIn, setIsLoggedIn] = useState(initLogIn);
-
-    const navigate = useNavigate();
-
-
 
     const handleLogout = () => {
         handleMenuClose()
@@ -68,7 +61,7 @@ export default function PrimarySearchAppBar() {
         setShowLogIn(true);
     }
 
-    const handleChange = (data : boolean) => {
+    const handleChange = (data: boolean) => {
         setIsLoggedIn(data)
         setShowLogIn(false)
         setShowRegister(false)
@@ -80,13 +73,12 @@ export default function PrimarySearchAppBar() {
         setShowRegister(true);
     }
 
-    useEffect(() =>{
+    useEffect(() => {
         let log;
 
-        if (localStorage.getItem("log") === "true"){
+        if (localStorage.getItem("log") === "true") {
             log = true;
-        } else
-        {
+        } else {
             log = false;
         }
         setIsLoggedIn(log)
@@ -140,7 +132,7 @@ export default function PrimarySearchAppBar() {
                     aria-haspopup="true"
                     color="inherit"
                 >
-                    <AccountCircle />
+                    <AccountCircle/>
                 </IconButton>
                 <p>Profile</p>
             </MenuItem>
@@ -152,47 +144,47 @@ export default function PrimarySearchAppBar() {
         navigate("/cars")
     }
 
-    function handleShowCreate(){
+    function handleShowCreate() {
         navigate("/car")
     }
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
+        <Box sx={{flexGrow: 1}}>
             <AppBar position="static">
                 <Toolbar>
                     <Typography
                         variant="h6"
                         noWrap
                         component="div"
-                        sx={{ display: { xs: 'none', sm: 'block' } }}
+                        sx={{display: {xs: 'none', sm: 'block'}}}
                     >
-                       <div className={"inline"}></div>
+                        <div className={"inline"}></div>
                         <button className={"noStyle"} onClick={() => handleShowList()}>List</button>
                         <div className={"inline"}></div>
                         <button className={"noStyle"} onClick={() => handleShowCreate()}>Create</button>
                     </Typography>
-                    <Box sx={{ flexGrow: 1 }} />
+                    <Box sx={{flexGrow: 1}}/>
                     {isLoggedIn ?
-                        <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                        <IconButton
-                            size="large"
-                            edge="end"
-                            aria-label="account of current user"
-                            aria-controls={menuId}
-                            aria-haspopup="true"
-                            onClick={handleProfileMenuOpen}
-                            color="inherit"
-                        >
-                            <AccountCircle />
-                        </IconButton>
-                    </Box>
+                        <Box sx={{display: {xs: 'none', md: 'flex'}}}>
+                            <IconButton
+                                size="large"
+                                edge="end"
+                                aria-label="account of current user"
+                                aria-controls={menuId}
+                                aria-haspopup="true"
+                                onClick={handleProfileMenuOpen}
+                                color="inherit"
+                            >
+                                <AccountCircle/>
+                            </IconButton>
+                        </Box>
                         : <div>
                             <Button color="inherit" onClick={handleLogin}>Login</Button>
                             <Button color="inherit" onClick={handleRegister}>register</Button>
                         </div>
-                            }
+                    }
 
-                    <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
+                    <Box sx={{display: {xs: 'flex', md: 'none'}}}>
                         <IconButton
                             size="large"
                             aria-label="show more"
@@ -201,15 +193,13 @@ export default function PrimarySearchAppBar() {
                             onClick={handleMobileMenuOpen}
                             color="inherit"
                         >
-                            <MoreIcon />
+                            <MoreIcon/>
                         </IconButton>
                     </Box>
                 </Toolbar>
             </AppBar>
             {renderMobileMenu}
             {renderMenu}
-
-
             {showRegister ? <Register/> : null}
             {showLogIn ? <Login onChange={handleChange}/> : null}
 

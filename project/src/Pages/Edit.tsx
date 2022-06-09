@@ -20,11 +20,12 @@ type Car = {
     id: number
 }
 
-function Edit () {
-    const navigate = useNavigate();
+function Edit() {
 
+    const navigate = useNavigate();
     let {id} = useParams();
     const [detail, setCarData] = useState<Car>()
+    const [loop, setLoop] = useState(0)
 
     useEffect(() => {
         if (loop == 0) {
@@ -33,19 +34,16 @@ function Edit () {
         }
     }, [detail])
 
-    const [loop, setLoop] = useState(0)
-
-
-    function handleUpdate(car : Car) {
+    function handleUpdate(car: Car) {
         console.log(car)
         DataService(localStorage.getItem("token")).updateCar(car).then(() => navigate("/cars/" + car.id));
     }
 
-    function handleDelete(car : Car) {
+    function handleDelete(car: Car) {
         DataService(localStorage.getItem("token")).deleteCar(car).then(() => navigate("/cars"));
     }
 
-    function handleBack(){
+    function handleBack() {
         navigate("/cars")
     }
 
@@ -90,9 +88,10 @@ function Edit () {
                                     </tr>
                                     <tr>
                                         <td>
-                                            <button className={"delete"} onClick={()=> handleDelete(detail)}>Delete</button>
+                                            <button className={"delete"} onClick={() => handleDelete(detail)}>Delete
+                                            </button>
                                             <div className={"inline"}></div>
-                                            <button className={"back"} onClick={()=> handleBack()}>Back</button>
+                                            <button className={"back"} onClick={() => handleBack()}>Back</button>
                                         </td>
                                     </tr>
                                 </table>

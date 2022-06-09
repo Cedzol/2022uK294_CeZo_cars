@@ -18,10 +18,9 @@ type Car = {
     id: number
 }
 
-function CarDetail () {
+function CarDetail() {
 
     let {id} = useParams();
-
     const navigate = useNavigate();
     const [detail, setCarData] = useState<Car>()
 
@@ -32,15 +31,15 @@ function CarDetail () {
         }
     }, [detail])
 
-    function handleBack(){
+    function handleBack() {
         navigate("/cars")
     }
 
-    function handleEdit(detail : Car){
+    function handleEdit(detail: Car) {
         navigate("/cars/edit/" + detail.id)
     }
-    const [loop, setLoop] = useState(0)
 
+    const [loop, setLoop] = useState(0)
 
 
     return (
@@ -48,7 +47,7 @@ function CarDetail () {
             <div>
                 <PrimarySearchAppBar/>
             </div>
-            {detail == null? null :
+            {detail == null ? null :
                 <div>
                     <div className={"inlineCar"}>
                         <div className="detailCard">
@@ -86,7 +85,7 @@ function CarDetail () {
                 </div>
             }
         </div>
-        )
+    )
 }
 
 export default CarDetail;

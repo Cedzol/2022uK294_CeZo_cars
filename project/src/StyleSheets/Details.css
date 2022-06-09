@@ -1,21 +1,18 @@
 .detailCard {
     padding: 8px;
-    background-color: darkorange;
+    background-color: orange;
     margin: 20px;
     text-align: left;
     min-width: 330px;
-
     max-height: 500px;
 }
 
 .editCard {
     padding: 8px;
-    background-color: darkorange;
+    background-color: orange;
     margin: 20px;
     text-align: left;
     min-width: 780px;
-
-
 }
 
 .details{

@@ -2,13 +2,13 @@ import {AxiosInstance} from "axios";
 import {defaultAxiosInstance} from "../Api"
 
 type User = {
-    email : string,
-    password : string
+    email: string,
+    password: string
 }
 
 const RegisterService = (api: AxiosInstance = defaultAxiosInstance) => ({
 
-    registerUser: async (user : User) => {
+    registerUser: async (user: User) => {
         console.log(user)
         api.post('/register', {
             email: user.email,

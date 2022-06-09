@@ -3,13 +3,15 @@ import RegisterForm from "../Organism/RegisterForm";
 import {useNavigate} from "react-router-dom";
 
 type User = {
-    email : string,
-    password : string
+    email: string,
+    password: string
 }
 
 const Register = () => {
+
     const navigate = useNavigate();
-    const handleRegisterSubmit = (newUser : User) => {
+
+    const handleRegisterSubmit = (newUser: User) => {
         RegisterService().registerUser(newUser).then(() => navigate("/cars"));
         localStorage.setItem("log", "true");
     }
@@ -21,5 +23,4 @@ const Register = () => {
         </div>
     )
 }
-
 export default Register;

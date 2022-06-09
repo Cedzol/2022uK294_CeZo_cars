@@ -14,7 +14,7 @@ type Car = {
     id: number
 }
 
-const DataService = (token : string | null, api: AxiosInstance = defaultAxiosInstance) => ({
+const DataService = (token: string | null, api: AxiosInstance = defaultAxiosInstance) => ({
 
     getAllCars: async () => {
         const data = await api.get("/cars", {
@@ -25,7 +25,7 @@ const DataService = (token : string | null, api: AxiosInstance = defaultAxiosIns
         return data
     },
 
-    getCarById: async (id : string | undefined) => {
+    getCarById: async (id: string | undefined) => {
         const data = await api.get("/cars/" + id, {
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -34,7 +34,7 @@ const DataService = (token : string | null, api: AxiosInstance = defaultAxiosIns
         return data
     },
 
-    updateCar: async (car : Car) => {
+    updateCar: async (car: Car) => {
         console.log(car)
         const data = await api.put("/cars/" + car.id, {
             Name: car.Name,
@@ -55,7 +55,7 @@ const DataService = (token : string | null, api: AxiosInstance = defaultAxiosIns
         return data
     },
 
-    deleteCar: async (car : Car) => {
+    deleteCar: async (car: Car) => {
         const data = await api.delete("/cars/" + car.id, {
             headers: {
                 Authorization: `Bearer ${token}`,
@@ -64,8 +64,8 @@ const DataService = (token : string | null, api: AxiosInstance = defaultAxiosIns
         return data
     },
 
-    postCar : async (car : Car) => {
-        const data = await api.post("/cars",{
+    postCar: async (car: Car) => {
+        const data = await api.post("/cars", {
             Name: car.Name,
             Miles_per_Gallon: car.Miles_per_Gallon,
             Cylinders: car.Cylinders,

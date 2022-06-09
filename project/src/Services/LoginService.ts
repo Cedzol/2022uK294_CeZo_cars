@@ -3,13 +3,13 @@ import {defaultAxiosInstance} from "../Api"
 
 
 type User = {
-    email : string,
-    password : string
+    email: string,
+    password: string
 }
 
 const LoginService = (api: AxiosInstance = defaultAxiosInstance) => ({
 
-    loginUser: async (user : User) => {
+    loginUser: async (user: User) => {
         console.log(user)
         api.post('/login', {
             email: user.email,

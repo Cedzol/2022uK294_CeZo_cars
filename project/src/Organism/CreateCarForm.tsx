@@ -1,42 +1,43 @@
 import React from 'react';
-import { FormGroup } from '@mui/material';
+import {FormGroup} from '@mui/material';
 import {FormikValues, useFormik} from "formik";
 import "../StyleSheets/Crude.css"
 import {useNavigate} from "react-router-dom";
 
-
 const validateForm = (values: FormikValues) => {
-    const errors: { Name? : string,
-        Miles_per_Gallon? : string,
-        Cylinders? : string,
-        Displacement? : string,
-        Horsepower? : string,
-        Weight_in_lbs? : string,
-        Acceleration? : string,
-        Year? : string,
-        Origin? : string,
-        id? : number } = {};
+    const errors: {
+        Name?: string,
+        Miles_per_Gallon?: string,
+        Cylinders?: string,
+        Displacement?: string,
+        Horsepower?: string,
+        Weight_in_lbs?: string,
+        Acceleration?: string,
+        Year?: string,
+        Origin?: string,
+        id?: number
+    } = {};
 
     if (!values.Name) {
         errors.Name = 'Please provide a name';
     }
 
-    if (values.Name.length > 58){
+    if (values.Name.length > 58) {
         errors.Name = "Name "
     }
 
-    if (!values.Horsepower){
+    if (!values.Horsepower) {
         errors.Horsepower = "Please provide horsepower"
     }
 
-    if (values.Horsepower > 40000 || values.Horsepower < 0){
+    if (values.Horsepower > 40000 || values.Horsepower < 0) {
         errors.Horsepower = "Horsepower must be realistic"
     }
 
-    if (!values.Weight_in_lbs){
+    if (!values.Weight_in_lbs) {
         errors.Weight_in_lbs = "Please provide weight"
     }
-    if (values.Weight_in_lbs > 40000 || values.Weight_in_lbs < 0){
+    if (values.Weight_in_lbs > 40000 || values.Weight_in_lbs < 0) {
         errors.Weight_in_lbs = "Weight must be realistic"
     }
 
@@ -48,7 +49,7 @@ const validateForm = (values: FormikValues) => {
         errors.Year = "Please provide a year"
     }
 
-    if (values.Year.length > 12){
+    if (values.Year.length > 12) {
         errors.Year = "Not a valid Year"
     }
 
@@ -56,18 +57,18 @@ const validateForm = (values: FormikValues) => {
         errors.Origin = "Please provide an origin"
     }
 
-    if (values.Origin.length > 85){
+    if (values.Origin.length > 85) {
         errors.Origin = "Name of origin cannot be this long"
     }
 
     return errors;
 };
 
-const CreateCarForm = ({onSubmit} : {onSubmit: (user: any) => void} ) => {
+const CreateCarForm = ({onSubmit}: { onSubmit: (user: any) => void }) => {
 
     const navigate = useNavigate();
 
-    function handleBack(){
+    function handleBack() {
         navigate("/cars")
     }
 
@@ -122,7 +123,6 @@ const CreateCarForm = ({onSubmit} : {onSubmit: (user: any) => void} ) => {
                                                 type="text"
                                                 onChange={formik.handleChange}
                                                 value={formik.values.Name}
-
                                             />
                                         </td>
                                     </tr>
@@ -137,7 +137,6 @@ const CreateCarForm = ({onSubmit} : {onSubmit: (user: any) => void} ) => {
                                                 type="number"
                                                 onChange={formik.handleChange}
                                                 value={formik.values.Miles_per_Gallon}
-
                                             />
                                         </td>
                                     </tr>
@@ -152,7 +151,6 @@ const CreateCarForm = ({onSubmit} : {onSubmit: (user: any) => void} ) => {
                                                 type="number"
                                                 onChange={formik.handleChange}
                                                 value={formik.values.Cylinders}
-
                                             />
                                         </td>
                                     </tr>
@@ -167,7 +165,6 @@ const CreateCarForm = ({onSubmit} : {onSubmit: (user: any) => void} ) => {
                                                 type="number"
                                                 onChange={formik.handleChange}
                                                 value={formik.values.Displacement}
-
                                             />
                                         </td>
                                     </tr>
@@ -196,7 +193,6 @@ const CreateCarForm = ({onSubmit} : {onSubmit: (user: any) => void} ) => {
                                                 type="number"
                                                 onChange={formik.handleChange}
                                                 value={formik.values.Weight_in_lbs}
-
                                             />
                                         </td>
                                     </tr>
@@ -211,7 +207,6 @@ const CreateCarForm = ({onSubmit} : {onSubmit: (user: any) => void} ) => {
                                                 type="number"
                                                 onChange={formik.handleChange}
                                                 value={formik.values.Acceleration}
-
                                             />
                                         </td>
                                     </tr>
@@ -226,7 +221,6 @@ const CreateCarForm = ({onSubmit} : {onSubmit: (user: any) => void} ) => {
                                                 type="text"
                                                 onChange={formik.handleChange}
                                                 value={formik.values.Year}
-
                                             />
                                         </td>
                                     </tr>
@@ -241,7 +235,6 @@ const CreateCarForm = ({onSubmit} : {onSubmit: (user: any) => void} ) => {
                                                 type="text"
                                                 onChange={formik.handleChange}
                                                 value={formik.values.Origin}
-
                                             />
                                         </td>
                                     </tr>

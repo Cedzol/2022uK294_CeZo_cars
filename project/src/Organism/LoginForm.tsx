@@ -1,10 +1,9 @@
 import React from 'react';
-import { FormGroup } from '@mui/material';
+import {FormGroup} from '@mui/material';
 import {FormikValues, useFormik} from "formik";
 
-
 const validateForm = (values: FormikValues) => {
-    const errors: { email?: string, password? : string } = {};
+    const errors: { email?: string, password?: string } = {};
 
     if (!values.email) {
         errors.email = 'Please provide an email';
@@ -17,8 +16,7 @@ const validateForm = (values: FormikValues) => {
     return errors;
 };
 
-const LoginForm = ({onSubmit} : {onSubmit: (user: any) => void} ) => {
-
+const LoginForm = ({onSubmit}: { onSubmit: (user: any) => void }) => {
 
     const formik = useFormik({
         initialValues: {
@@ -61,7 +59,8 @@ const LoginForm = ({onSubmit} : {onSubmit: (user: any) => void} ) => {
                         {formik.errors.email && formik.touched.email ? <div>{formik.errors.email}</div> : null}</p>
 
                     <p className='error'>
-                        {formik.errors.password && formik.touched.password ? <div>{formik.errors.password}</div> : null}</p>
+                        {formik.errors.password && formik.touched.password ?
+                            <div>{formik.errors.password}</div> : null}</p>
                 </div>
             </form>
         </FormGroup>
