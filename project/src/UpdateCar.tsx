@@ -1,196 +1,246 @@
 import React, {useEffect, useState} from 'react';
 import { AppBar, FormGroup, Grid } from '@mui/material';
 import {FormikValues, useFormik} from "formik";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import DataService from "./Serices/DataService";
 
 
 type Car = {
-    Name: string,
-    Miles_per_Gallon: number,
-    Cylinders: number,
-    Displacement: number,
-    Horsepower: number,
-    Weight_in_lbs: number,
-    Acceleration: number,
-    Year: string,
-    Origin: string,
-    id: number
+    Name : string,
+    Miles_per_Gallon : number,
+    Cylinders : number,
+    Displacement : number,
+    Horsepower : number,
+    Weight_in_lbs : number,
+    Acceleration : number,
+    Year : string,
+    Origin : string,
+    id : number
 }
 
 const validateForm = (values: FormikValues) => {
-    const errors: { email?: string, password? : string } = {};
+    const errors: { Name? : string,
+        Miles_per_Gallon? : string,
+        Cylinders? : string,
+        Displacement? : string,
+        Horsepower? : string,
+        Weight_in_lbs? : string,
+        Acceleration? : string,
+        Year? : string,
+        Origin? : string,
+        id? : number } = {};
 
-    if (!values.email) {
-        errors.email = 'Please provide an email';
+    if (!values.Name) {
+        errors.Name = 'Please provide a name';
     }
 
-    if (!values.password) {
-        errors.password = 'Please provide a password';
+    if (!values.Miles_per_Gallon) {
+        errors.Miles_per_Gallon = 'Please provide mpg';
+    }
+    if (!values.Cylinders){
+        errors.Cylinders = "Please provide number of cylinders"
+    }
+
+    if (!values.Displacement){
+        errors.Displacement = "Please provide displacement"
+    }
+
+    if (!values.Horsepower){
+        errors.Horsepower = "Please provide horsepower"
+    }
+
+    if (!values.Weight_in_lbs){
+        errors.Weight_in_lbs = "Please provide weight"
+    }
+
+    if (!values.Acceleration) {
+        errors.Acceleration = "Please provide acceleration"
+    }
+
+    if (!values.Year) {
+        errors.Year = "Please provide a year"
+    }
+
+    if (!values.Origin) {
+        errors.Origin = "Please provide an origin"
     }
 
     return errors;
 };
 
-const PutForm = ({onSubmit} : {onSubmit: (car: any) => void}) => {
+const UpdateCar = (props : any) => {
+
+    const navigate = useNavigate();
 
     let {id} = useParams();
+    const [detail, setCarData] = useState<Car>(props.car)
 
+    useEffect(() => {
+        if (loop == 0) {
+            DataService(localStorage.getItem("token")).getCarById(id).then((carData) => setCarData(carData.data))
+            setLoop(1)
+        }
+    }, [detail])
+
+    function handleEdit(detail : Car){
+        navigate("/cars/edit/" + detail.id)
+    }
     const [loop, setLoop] = useState(0)
 
-    // @ts-ignore
-    const getCar: () => Car = async () => {
-        if (loop === 0) {
-            DataService(localStorage.getItem("token")).getCarById(id)
-                .then((data) => setDetail(data.data))
-                .catch(function (error) {
-                    console.log(error);
-                });
-            setLoop(1);
-        }
-    }
-    const [detail, setDetail] = useState<Car>(getCar())
 
     const formik = useFormik({
-        initialValues: {
-            Name: '',
-            Miles_per_Gallon: '',
-            Cylinders: '',
-            Displacement: '',
-            Horsepower: '',
-            Weight_in_lbs: '',
-            Acceleration: '',
-            Year: '',
-            Origin: '',
-            id: detail.id
-        },
-
-        validate: validateForm,
-        onSubmit: values => {
-            const updatedCar = {
-                Name: values.Name,
-                Miles_per_Gallon: values.Miles_per_Gallon,
-                Cylinders: values.Cylinders,
-                Displacement: values.Displacement,
-                Horsepower: values.Horsepower,
-                Weight_in_lbs: values.Weight_in_lbs,
-                Acceleration: values.Acceleration,
-                Year: values.Year,
-                Origin: values.Origin,
+            initialValues: {
+                Name: detail.Name,
+                Miles_per_Gallon: detail.Miles_per_Gallon,
+                Cylinders: detail.Cylinders,
+                Displacement: detail.Displacement,
+                Horsepower: detail.Horsepower,
+                Weight_in_lbs: detail.Weight_in_lbs,
+                Acceleration: detail.Weight_in_lbs,
+                Year: detail.Year,
+                Origin: detail.Origin,
                 id: detail.id
+            },
+
+            validate: validateForm,
+            onSubmit: values => {
+                const updatedCar = {
+                    Name: values.Name,
+                    Miles_per_Gallon: values.Miles_per_Gallon,
+                    Cylinders: values.Cylinders,
+                    Displacement: values.Displacement,
+                    Horsepower: values.Horsepower,
+                    Weight_in_lbs: values.Weight_in_lbs,
+                    Acceleration: values.Acceleration,
+                    Year: values.Year,
+                    Origin: values.Origin,
+                    id: detail.id
+                }
+                props.onSubmit(updatedCar);
             }
-            onSubmit(updatedCar);
-        }
-    });
+        });
 
     return (
         <FormGroup>
-            <form onSubmit={formik.handleSubmit}>
+            {formik == null  || detail == null? null :
+                <form onSubmit={formik.handleSubmit}>
 
-                <input
-                    id="Name"
-                    name="Name"
-                    type="text"
-                    onChange={formik.handleChange}
-                    value={formik.values.Name}
+                    <input
+                        id="Name"
+                        name="Name"
+                        type="text"
+                        onChange={formik.handleChange}
+                        value={formik.values.Name}
+                        placeholder={detail.Name}
 
-                />
-                <label htmlFor="name">Name</label>
+                    />
+                    <label htmlFor="name">Name</label>
 
 
-                <input
-                    id="Miles_per_Gallon"
-                    name="Miles_per_Gallon"
-                    type="number"
-                    onChange={formik.handleChange}
-                    value={formik.values.Miles_per_Gallon}
+                    <input
+                        id="Miles_per_Gallon"
+                        name="Miles_per_Gallon"
+                        type="number"
+                        onChange={formik.handleChange}
+                        value={formik.values.Miles_per_Gallon}
+                        placeholder={detail.Miles_per_Gallon.toString()}
 
-                />
-                <label htmlFor="Miles_per_Gallon">Mpg</label>
 
-                <input
-                    id="Cylinders"
-                    name="Cylinders"
-                    type="number"
-                    onChange={formik.handleChange}
-                    value={formik.values.Cylinders}
+                    />
+                    <label htmlFor="Miles_per_Gallon">Mpg</label>
 
-                />
-                <label htmlFor="Cylinders">Cylinders</label>
+                    <input
+                        id="Cylinders"
+                        name="Cylinders"
+                        type="number"
+                        onChange={formik.handleChange}
+                        value={formik.values.Cylinders}
+                        placeholder={detail.Cylinders.toString()}
 
-                <input
-                    id="Displacement"
-                    name="Displacement"
-                    type="number"
-                    onChange={formik.handleChange}
-                    value={formik.values.Displacement}
+                    />
+                    <label htmlFor="Cylinders">Cylinders</label>
 
-                />
-                <label htmlFor="Displacement">Displacement</label>
+                    <input
+                        id="Displacement"
+                        name="Displacement"
+                        type="number"
+                        onChange={formik.handleChange}
+                        value={formik.values.Displacement}
+                        placeholder={detail.Displacement.toString()}
 
-                <input
-                    id="Horsepower"
-                    name="Horsepower"
-                    type="number"
-                    onChange={formik.handleChange}
-                    value={formik.values.Horsepower}
+                    />
+                    <label htmlFor="Displacement">Displacement</label>
 
-                />
-                <label htmlFor="Horsepower">Horsepower</label>
+                    <input
+                        id="Horsepower"
+                        name="Horsepower"
+                        type="number"
+                        onChange={formik.handleChange}
+                        value={formik.values.Horsepower}
+                        placeholder={detail.Horsepower.toString()}
 
-                <input
-                    id="Weight_in_lbs"
-                    name="Weight_in_lbs"
-                    type="number"
-                    onChange={formik.handleChange}
-                    value={formik.values.Weight_in_lbs}
+                    />
+                    <label htmlFor="Horsepower">Horsepower</label>
 
-                />
-                <label htmlFor="Weight_in_lbs">Weight_in_lbs</label>
+                    <input
+                        id="Weight_in_lbs"
+                        name="Weight_in_lbs"
+                        type="number"
+                        onChange={formik.handleChange}
+                        value={formik.values.Weight_in_lbs}
+                        placeholder={detail.Weight_in_lbs.toString()}
 
-                <input
-                    id="Acceleration"
-                    name="Acceleration"
-                    type="number"
-                    onChange={formik.handleChange}
-                    value={formik.values.Acceleration}
+                    />
+                    <label htmlFor="Weight_in_lbs">Weight_in_lbs</label>
 
-                />
-                <label htmlFor="Acceleration">Acceleration</label>
+                    <input
+                        id="Acceleration"
+                        name="Acceleration"
+                        type="number"
+                        onChange={formik.handleChange}
+                        value={formik.values.Acceleration}
+                        placeholder={detail.Acceleration.toString()}
 
-                <input
-                    id="Year"
-                    name="Year"
-                    type="text"
-                    onChange={formik.handleChange}
-                    value={formik.values.Year}
+                    />
+                    <label htmlFor="Acceleration">Acceleration</label>
 
-                />
-                <label htmlFor="Year">Year</label>
+                    <input
+                        id="Year"
+                        name="Year"
+                        type="text"
+                        onChange={formik.handleChange}
+                        value={formik.values.Year}
+                        placeholder={detail.Year}
 
-                <input
-                    id="Origin"
-                    name="Origin"
-                    type="text"
-                    onChange={formik.handleChange}
-                    value={formik.values.Origin}
+                    />
+                    <label htmlFor="Year">Year</label>
 
-                />
-                <label htmlFor="Origin">Origin</label>
+                    <input
+                        id="Origin"
+                        name="Origin"
+                        type="text"
+                        onChange={formik.handleChange}
+                        value={formik.values.Origin}
+                        placeholder={detail.Origin}
 
-                <br/>
+                    />
+                    <label htmlFor="Origin">Origin</label>
 
-                <button type="submit">Submit</button>
-                <div>
-                    <p className='error'>
-                        {formik.errors.Name && formik.touched.Name ? <div>{formik.errors.Name}</div> : null}</p>
+                    <br/>
 
-                    <p className='error'>
-                        {formik.errors.Miles_per_Gallon && formik.touched.Miles_per_Gallon ? <div>{formik.errors.Miles_per_Gallon}</div> : null}</p>
-                </div>
-            </form>
+                    <button type="submit">Submit</button>
+                    <div>
+                        <p className='error'>
+                            {formik.errors.Name && formik.touched.Name ? <div>{formik.errors.Name}</div> : null}</p>
+
+                        <p className='error'>
+                            {formik.errors.Miles_per_Gallon && formik.touched.Miles_per_Gallon ?
+                                <div>{formik.errors.Miles_per_Gallon}</div> : null}</p>
+                    </div>
+                </form>
+            }
         </FormGroup>
     );
 }
 
-export default PutForm;
+export default UpdateCar;

@@ -62,6 +62,26 @@ const DataService = (token : string | null, api: AxiosInstance = defaultAxiosIns
             },
         })
         return data
+    },
+
+    postCar : async (car : Car) => {
+        const data = await api.post("/cars",{
+            Name: car.Name,
+            Miles_per_Gallon: car.Miles_per_Gallon,
+            Cylinders: car.Cylinders,
+            Displacement: car.Displacement,
+            Horsepower: car.Horsepower,
+            Weight_in_lbs: car.Weight_in_lbs,
+            Acceleration: car.Acceleration,
+            Year: car.Year,
+            Origin: car.Origin,
+            id: car.id
+        }, {
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        })
+        return data;
     }
 })
 

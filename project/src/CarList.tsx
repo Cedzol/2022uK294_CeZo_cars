@@ -38,21 +38,25 @@ const CarList = () => {
         navigate("/cars/" + id)
     }
 
+    function handleCreate() {
+        navigate("/car")
+    }
+
     return (
         <div>
             <PrimarySearchAppBar/>
+            <div className={"pad"}>
+                {carData.length > 0 ? <button className={"create"} onClick={() => handleCreate()}>Create Car</button>: null}
+            </div>
             {carData.map((car : Car, i : number) => {
                 return (<div className={"inlineCar"}>
                         <div className="card">
                                 <div key={i}>
-                                    <b>Name:</b>
-                                    <p >{car.Name}</p>
+                                    <p><b>Name: </b>{car.Name}</p>
 
-                                    <b >Id:</b>
-                                    <p >{car.id}</p>
+                                    <p><b>Year: </b>{car.Year}</p>
 
-                                    <b >Year:</b>
-                                    <p >{car.Year}</p>
+                                    <p><b>Id: </b>{car.id}</p>
                                     <div className={"inline"}><button className={"back"} onClick={()=> handleDetail(car.id)}>Details</button></div>
 
                                 </div>
