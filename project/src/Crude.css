@@ -1,0 +1,51 @@
+.submit {
+    background-color: deepskyblue;
+    border: black;
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.submit:hover {
+    background-color: cornflowerblue;
+}
+
+.form {
+    padding-top: 50px;
+    padding-left: calc(100% / 3);
+}
+
+.createCard {
+    background-color: lightskyblue;
+    min-height: 380px;
+    padding-left: 15px;
+}
+
+.buttons {
+    padding-top: 20px;
+}
+
+.createBack{
+    margin-left: 30px;
+    background-color: lightcoral;
+    border: black;
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.createBack:hover {
+    background-color: crimson;
+}
+
+.center {
+    text-align: center;
+}
+
+td {
+    text-align: left;
+    min-width: 130px;
+}
+

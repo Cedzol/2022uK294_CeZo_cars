@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 import { AppBar, FormGroup, Grid } from '@mui/material';
 import {FormikValues, useFormik} from "formik";
 import RegisterService from "./Serices/RegisterService";
+import "./Crude.css"
+import {useNavigate} from "react-router-dom";
 
 
 type Car = {
@@ -58,6 +60,11 @@ const validateForm = (values: FormikValues) => {
 
 const CreateCarForm = ({onSubmit} : {onSubmit: (user: any) => void} ) => {
 
+    const navigate = useNavigate();
+
+    function handleBack(){
+        navigate("/cars")
+    }
 
     const formik = useFormik({
         initialValues: {
@@ -91,113 +98,170 @@ const CreateCarForm = ({onSubmit} : {onSubmit: (user: any) => void} ) => {
         }
     });
 
-    return (
-        <FormGroup>
-            <form onSubmit={formik.handleSubmit}>
+    return (<div>
+            {localStorage.getItem("log") != "true" ? <p>Try to log in</p> :
+                <FormGroup>
+                    <div className={"center"}>
+                        <form className={"form"} onSubmit={formik.handleSubmit}>
+                            <div className={"createCard"}>
+                                <h2>Save a new car</h2>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <label htmlFor="name">Name</label>
+                                        </td>
+                                        <td>
+                                            <input
+                                                id="Name"
+                                                name="Name"
+                                                type="text"
+                                                onChange={formik.handleChange}
+                                                value={formik.values.Name}
 
-                <input
-                    id="Name"
-                    name="Name"
-                    type="text"
-                    onChange={formik.handleChange}
-                    value={formik.values.Name}
+                                            />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label htmlFor="Miles_per_Gallon">Mpg</label>
+                                        </td>
+                                        <td>
+                                            <input
+                                                id="Miles_per_Gallon"
+                                                name="Miles_per_Gallon"
+                                                type="number"
+                                                onChange={formik.handleChange}
+                                                value={formik.values.Miles_per_Gallon}
 
-                />
-                <label htmlFor="name">Name</label>
+                                            />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label htmlFor="Cylinders">Cylinders</label>
+                                        </td>
+                                        <td>
+                                            <input
+                                                id="Cylinders"
+                                                name="Cylinders"
+                                                type="number"
+                                                onChange={formik.handleChange}
+                                                value={formik.values.Cylinders}
 
+                                            />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label htmlFor="Displacement">Displacement</label>
+                                        </td>
+                                        <td>
+                                            <input
+                                                id="Displacement"
+                                                name="Displacement"
+                                                type="number"
+                                                onChange={formik.handleChange}
+                                                value={formik.values.Displacement}
 
-                <input
-                    id="Miles_per_Gallon"
-                    name="Miles_per_Gallon"
-                    type="number"
-                    onChange={formik.handleChange}
-                    value={formik.values.Miles_per_Gallon}
+                                            />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label htmlFor="Horsepower">Horsepower</label>
+                                        </td>
+                                        <td>
+                                            <input
+                                                id="Horsepower"
+                                                name="Horsepower"
+                                                type="number"
+                                                onChange={formik.handleChange}
+                                                value={formik.values.Horsepower}
+                                            />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label htmlFor="Weight_in_lbs">Weight_in_lbs</label>
+                                        </td>
+                                        <td>
+                                            <input
+                                                id="Weight_in_lbs"
+                                                name="Weight_in_lbs"
+                                                type="number"
+                                                onChange={formik.handleChange}
+                                                value={formik.values.Weight_in_lbs}
 
-                />
-                <label htmlFor="Miles_per_Gallon">Mpg</label>
+                                            />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label htmlFor="Acceleration">Acceleration</label>
+                                        </td>
+                                        <td>
+                                            <input
+                                                id="Acceleration"
+                                                name="Acceleration"
+                                                type="number"
+                                                onChange={formik.handleChange}
+                                                value={formik.values.Acceleration}
 
-                <input
-                    id="Cylinders"
-                    name="Cylinders"
-                    type="number"
-                    onChange={formik.handleChange}
-                    value={formik.values.Cylinders}
+                                            />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label htmlFor="Year">Year</label>
+                                        </td>
+                                        <td>
+                                            <input
+                                                id="Year"
+                                                name="Year"
+                                                type="text"
+                                                onChange={formik.handleChange}
+                                                value={formik.values.Year}
 
-                />
-                <label htmlFor="Cylinders">Cylinders</label>
+                                            />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <label htmlFor="Origin">Origin</label>
+                                        </td>
+                                        <td>
+                                            <input
+                                                id="Origin"
+                                                name="Origin"
+                                                type="text"
+                                                onChange={formik.handleChange}
+                                                value={formik.values.Origin}
 
-                <input
-                    id="Displacement"
-                    name="Displacement"
-                    type="number"
-                    onChange={formik.handleChange}
-                    value={formik.values.Displacement}
+                                            />
+                                        </td>
+                                    </tr>
+                                </table>
 
-                />
-                <label htmlFor="Displacement">Displacement</label>
+                                <div className={"buttons"}>
+                                    <button className={"submit"} type="submit">Submit</button>
+                                    <button className={"createBack"} onClick={() => handleBack()}>back</button>
+                                </div>
 
-                <input
-                    id="Horsepower"
-                    name="Horsepower"
-                    type="number"
-                    onChange={formik.handleChange}
-                    value={formik.values.Horsepower}
+                                <div>
+                                    <p className='error'>
+                                        {formik.errors.Name && formik.touched.Name ?
+                                            <div>{formik.errors.Name}</div> : null}</p>
 
-                />
-                <label htmlFor="Horsepower">Horsepower</label>
-
-                <input
-                    id="Weight_in_lbs"
-                    name="Weight_in_lbs"
-                    type="number"
-                    onChange={formik.handleChange}
-                    value={formik.values.Weight_in_lbs}
-
-                />
-                <label htmlFor="Weight_in_lbs">Weight_in_lbs</label>
-
-                <input
-                    id="Acceleration"
-                    name="Acceleration"
-                    type="number"
-                    onChange={formik.handleChange}
-                    value={formik.values.Acceleration}
-
-                />
-                <label htmlFor="Acceleration">Acceleration</label>
-
-                <input
-                    id="Year"
-                    name="Year"
-                    type="text"
-                    onChange={formik.handleChange}
-                    value={formik.values.Year}
-
-                />
-                <label htmlFor="Year">Year</label>
-
-                <input
-                    id="Origin"
-                    name="Origin"
-                    type="text"
-                    onChange={formik.handleChange}
-                    value={formik.values.Origin}
-
-                />
-                <label htmlFor="Origin">Origin</label>
-
-                <br/>
-
-                <button type="submit">Submit</button>
-                <div>
-                    <p className='error'>
-                        {formik.errors.Name && formik.touched.Name ? <div>{formik.errors.Name}</div> : null}</p>
-
-                    <p className='error'>
-                        {formik.errors.Miles_per_Gallon && formik.touched.Miles_per_Gallon ? <div>{formik.errors.Miles_per_Gallon}</div> : null}</p>
-                </div>
-            </form>
-        </FormGroup>
+                                    <p className='error'>
+                                        {formik.errors.Miles_per_Gallon && formik.touched.Miles_per_Gallon ?
+                                            <div>{formik.errors.Miles_per_Gallon}</div> : null}</p>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </FormGroup>
+            }
+        </div>
     );
 }
 

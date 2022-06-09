@@ -57,12 +57,13 @@ function Edit () {
             <div>
                 <PrimarySearchAppBar/>
             </div>
-            {detail == null ? null :
+            {detail == null || localStorage.getItem("log") != "true" ? null :
                 <div>
                     <div className={"inlineCar"}>
                         <div className="editCard">
                             <div>
                                 <table>
+                                    <h2>Original Data</h2>
                                     <tr>
                                         <td className={"details"}>
                                             <p><b>Name: </b>{detail.Name}</p>
@@ -93,8 +94,9 @@ function Edit () {
                                     <tr>
                                         <td>
                                             <button className={"delete"} onClick={()=> handleDelete(detail)}>Delete</button>
+                                            <div className={"inline"}></div>
+                                            <button className={"back"} onClick={()=> handleBack()}>Back</button>
                                         </td>
-                                        <td><button className={"back"} onClick={()=> handleBack()}>Back</button> </td>
                                     </tr>
                                 </table>
 

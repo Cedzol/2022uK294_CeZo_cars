@@ -13,9 +13,9 @@
     background-color: darkorange;
     margin: 20px;
     text-align: left;
-    min-width: 580px;
+    min-width: 780px;
 
-    max-height: 500px;
+
 }
 
 .details{
@@ -40,6 +40,7 @@
 
 .back {
     background-color: crimson;
+
 }
 
 .delete {

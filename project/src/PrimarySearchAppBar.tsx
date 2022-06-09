@@ -136,6 +136,18 @@ export default function PrimarySearchAppBar() {
         setShowRegister(true);
     }
 
+    useEffect(() =>{
+        let log;
+
+        if (localStorage.getItem("log") === "true"){
+            log = true;
+        } else
+        {
+            log = false;
+        }
+        setIsLoggedIn(log)
+    })
+
 
     const menuId = 'primary-search-account-menu';
     const renderMenu = (

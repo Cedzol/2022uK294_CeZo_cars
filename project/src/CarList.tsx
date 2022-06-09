@@ -48,6 +48,7 @@ const CarList = () => {
             <div className={"pad"}>
                 {carData.length > 0 ? <button className={"create"} onClick={() => handleCreate()}>Create Car</button>: null}
             </div>
+            {carData.length == 0? <p>Try reloading or login in again</p> : null}
             {carData.map((car : Car, i : number) => {
                 return (<div className={"inlineCar"}>
                         <div className="card">
