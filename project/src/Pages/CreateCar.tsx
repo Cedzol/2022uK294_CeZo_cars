@@ -27,6 +27,7 @@ const CreateCar = () => {
         )
         localStorage.setItem("log", "true");
     }
+
     return (
         <div>
             <PrimarySearchAppBar/>
