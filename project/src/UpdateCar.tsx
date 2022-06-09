@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
-import { AppBar, FormGroup, Grid } from '@mui/material';
+import { FormGroup} from '@mui/material';
 import {FormikValues, useFormik} from "formik";
-import {useNavigate, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import DataService from "./Serices/DataService";
 import "./Crude.css"
 
@@ -35,12 +35,23 @@ const validateForm = (values: FormikValues) => {
         errors.Name = 'Please provide a name';
     }
 
+    if (values.Name.length > 58){
+        errors.Name = "Name "
+    }
+
     if (!values.Horsepower){
         errors.Horsepower = "Please provide horsepower"
     }
 
+    if (values.Horsepower > 40000 || values.Horsepower < 0){
+        errors.Horsepower = "Horsepower must be realistic"
+    }
+
     if (!values.Weight_in_lbs){
         errors.Weight_in_lbs = "Please provide weight"
+    }
+    if (values.Weight_in_lbs > 40000 || values.Weight_in_lbs < 0){
+        errors.Weight_in_lbs = "Weight must be realistic"
     }
 
     if (!values.Acceleration) {
@@ -51,16 +62,22 @@ const validateForm = (values: FormikValues) => {
         errors.Year = "Please provide a year"
     }
 
+    if (values.Year.length > 12){
+        errors.Year = "Not a valid Year"
+    }
+
     if (!values.Origin) {
         errors.Origin = "Please provide an origin"
+    }
+
+    if (values.Origin.length > 85){
+        errors.Origin = "Name of origin cannot be this long"
     }
 
     return errors;
 };
 
 const UpdateCar = (props : any) => {
-
-    const navigate = useNavigate();
 
     let {id} = useParams();
     const [detail, setCarData] = useState<Car>(props.car)
@@ -72,9 +89,6 @@ const UpdateCar = (props : any) => {
         }
     }, [detail])
 
-    function handleEdit(detail : Car){
-        navigate("/cars/edit/" + detail.id)
-    }
     const [loop, setLoop] = useState(0)
 
 
@@ -223,7 +237,7 @@ const UpdateCar = (props : any) => {
                         </tr>
                         <tr>
                             <td>
-                                <label htmlFor="Year">Year</label>
+                                <label htmlFor="Year">Date</label>
                             </td>
                             <td>
                                 <input
@@ -257,11 +271,40 @@ const UpdateCar = (props : any) => {
                     <button className={"submit"} type="submit">Submit</button>
                     <div>
                         <p className='error'>
-                            {formik.errors.Name && formik.touched.Name ? <div>{formik.errors.Name}</div> : null}</p>
+                            {formik.errors.Name && formik.touched.Name ?
+                                <div>{formik.errors.Name}</div> : null}</p>
 
                         <p className='error'>
                             {formik.errors.Miles_per_Gallon && formik.touched.Miles_per_Gallon ?
                                 <div>{formik.errors.Miles_per_Gallon}</div> : null}</p>
+
+                        <p className='error'>
+                            {formik.errors.Cylinders && formik.touched.Cylinders ?
+                                <div>{formik.errors.Cylinders}</div> : null}</p>
+
+                        <p className='error'>
+                            {formik.errors.Displacement && formik.touched.Displacement ?
+                                <div>{formik.errors.Displacement}</div> : null}</p>
+
+                        <p className='error'>
+                            {formik.errors.Horsepower && formik.touched.Horsepower ?
+                                <div>{formik.errors.Horsepower}</div> : null}</p>
+
+                        <p className='error'>
+                            {formik.errors.Weight_in_lbs && formik.touched.Weight_in_lbs ?
+                                <div>{formik.errors.Weight_in_lbs}</div> : null}</p>
+
+                        <p className='error'>
+                            {formik.errors.Acceleration && formik.touched.Acceleration ?
+                                <div>{formik.errors.Acceleration}</div> : null}</p>
+
+                        <p className='error'>
+                            {formik.errors.Year && formik.touched.Year ?
+                                <div>{formik.errors.Year}</div> : null}</p>
+
+                        <p className='error'>
+                            {formik.errors.Origin && formik.touched.Origin ?
+                                <div>{formik.errors.Origin}</div> : null}</p>
                     </div>
                 </form>
             }

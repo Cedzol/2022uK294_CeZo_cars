@@ -1,7 +1,7 @@
 import * as React from "react";
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useState} from "react";
 import DataService from "./Serices/DataService";
-import {Link, useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import PrimarySearchAppBar from "./PrimarySearchAppBar";
 import "./Details.css"
 
@@ -67,7 +67,7 @@ function CarDetail () {
 
                                 <p><b>Acceleration: </b>{detail.Acceleration}</p>
 
-                                <p><b>Year: </b>{detail.Year}</p>
+                                <p><b>Date: </b>{detail.Year}</p>
 
                                 <p><b>Origin: </b>{detail.Origin}</p>
 

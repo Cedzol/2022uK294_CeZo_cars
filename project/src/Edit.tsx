@@ -1,7 +1,7 @@
 import * as React from "react";
 import {useEffect, useState} from "react";
 import DataService from "./Serices/DataService";
-import {Link, useNavigate, useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 import PrimarySearchAppBar from "./PrimarySearchAppBar";
 import "./Details.css"
 import UpdateCar from "./UpdateCar";
@@ -33,9 +33,6 @@ function Edit () {
         }
     }, [detail])
 
-    function handleEdit(detail : Car){
-        navigate("/cars/edit/" + detail.id)
-    }
     const [loop, setLoop] = useState(0)
 
 
@@ -80,7 +77,7 @@ function Edit () {
 
                                             <p><b>Acceleration: </b>{detail.Acceleration}</p>
 
-                                            <p><b>Year: </b>{detail.Year}</p>
+                                            <p><b>Date: </b>{detail.Year}</p>
 
                                             <p><b>Origin: </b>{detail.Origin}</p>
 

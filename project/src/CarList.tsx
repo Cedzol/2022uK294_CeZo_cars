@@ -2,9 +2,8 @@ import * as React from "react";
 import {useEffect, useState} from "react";
 import DataService from "./Serices/DataService";
 import "./list.css"
-import LoginService from "./Serices/LoginService";
 import PrimarySearchAppBar from "./PrimarySearchAppBar";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 const CarList = () => {
 
@@ -22,8 +21,22 @@ const CarList = () => {
     }
 
     const [carData, setCarData] = useState([])
+    let [filteredData, setFilteredData] = useState([])
+
     const getToken = () => {
         return localStorage.getItem("token")
+    }
+
+    const handleFilter = (event : any) => {
+        const searchWord = event.target.value.toLowerCase();
+        let newFilter = carData.filter((value) => {
+            return Object.values(value).join("").toLowerCase().includes(searchWord)
+        })
+        setFilteredData(newFilter);
+    }
+
+    if (filteredData.length === 0) {
+        filteredData = carData;
     }
 
     const navigate = useNavigate();
@@ -33,6 +46,7 @@ const CarList = () => {
         DataService(tok).getAllCars().then((allCarData) => setCarData(allCarData.data))
 
     }, [carData])
+
 
     function handleDetail(id : number){
         navigate("/cars/" + id)
@@ -47,15 +61,18 @@ const CarList = () => {
             <PrimarySearchAppBar/>
             <div className={"pad"}>
                 {carData.length > 0 ? <button className={"create"} onClick={() => handleCreate()}>Create Car</button>: null}
+                <div className={"inline"}></div>
+                <label>Search: </label>
+                <input type="text" onChange={handleFilter}/>
             </div>
             {carData.length == 0? <p>Try reloading or login in again</p> : null}
-            {carData.map((car : Car, i : number) => {
+            {filteredData.map((car : Car, i : number) => {
                 return (<div className={"inlineCar"}>
                         <div className="card">
                                 <div key={i}>
                                     <p><b>Name: </b>{car.Name}</p>
 
-                                    <p><b>Year: </b>{car.Year}</p>
+                                    <p><b>Date: </b>{car.Year}</p>
 
                                     <p><b>Id: </b>{car.id}</p>
                                     <div className={"inline"}><button className={"back"} onClick={()=> handleDetail(car.id)}>Details</button></div>

@@ -1,8 +1,8 @@
 import * as React from "react";
 import PrimarySearchAppBar from "./PrimarySearchAppBar";
 import CreateCarForm from "./CreateCarForm";
-import RegisterService from "./Serices/RegisterService";
 import DataService from "./Serices/DataService";
+import {useNavigate} from "react-router-dom";
 
 type Car = {
     Name : string,
@@ -18,10 +18,13 @@ type Car = {
 }
 
 const CreateCar = () => {
+    const navigate = useNavigate();
 
     const handleCarSubmit = (newCar : Car) => {
         console.log(newCar)
-        DataService(localStorage.getItem("token")).postCar(newCar)
+        DataService(localStorage.getItem("token")).postCar(newCar).then(() =>
+            navigate("/cars/" + newCar.id)
+        )
         localStorage.setItem("log", "true");
     }
     return (
