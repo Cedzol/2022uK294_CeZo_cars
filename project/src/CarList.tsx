@@ -4,7 +4,7 @@ import DataService from "./Serices/DataService";
 import "./list.css"
 import LoginService from "./Serices/LoginService";
 import PrimarySearchAppBar from "./PrimarySearchAppBar";
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 const CarList = () => {
 
@@ -26,6 +26,7 @@ const CarList = () => {
         return localStorage.getItem("token")
     }
 
+    const navigate = useNavigate();
 
     useEffect(() => {
         const tok = getToken();
@@ -33,7 +34,9 @@ const CarList = () => {
 
     }, [carData])
 
-
+    function handleDetail(id : number){
+        navigate("/cars/" + id)
+    }
 
     return (
         <div>
@@ -50,8 +53,8 @@ const CarList = () => {
 
                                     <b >Year:</b>
                                     <p >{car.Year}</p>
+                                    <div className={"inline"}><button className={"back"} onClick={()=> handleDetail(car.id)}>Details</button></div>
 
-                                    <Link to={`/cars/${car.id}`}>Details</Link>
                                 </div>
                         </div>
                     </div>

@@ -1,7 +1,7 @@
 import * as React from "react";
 import {useEffect, useState} from "react";
 import DataService from "./Serices/DataService";
-import {Link, useParams} from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import PrimarySearchAppBar from "./PrimarySearchAppBar";
 import "./Details.css"
 
@@ -19,6 +19,16 @@ type Car = {
 }
 
 function CarDetail () {
+
+    const navigate = useNavigate();
+
+    function handleBack(){
+        navigate("/cars")
+    }
+
+    function handleEdit(detail : Car){
+        navigate("/cars/edit/" + detail.id)
+    }
 
     let {id} = useParams();
     console.log(id)
@@ -62,8 +72,8 @@ function CarDetail () {
             </div>
         </div>
             <div className={"center"}>
-                <div className={"inline"}><Link to={`/cars/edit/${detail.id}`}>Edit</Link></div>
-                <div className={"inline"}><Link to={`/cars/edit/${detail.id}`}>Back</Link></div>
+                <div className={"inline"}><button className={"edit"} onClick={()=> handleEdit(detail)}>Edit</button></div>
+                <div className={"inline"}><button className={"back"} onClick={()=> handleBack()}>Back</button></div>
 
             </div>
         </div>

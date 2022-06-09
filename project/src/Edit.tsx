@@ -52,6 +52,10 @@ function Edit () {
         DataService(localStorage.getItem("token")).deleteCar(car).then(() => navigate("/cars"));
     }
 
+    function handleBack(){
+        navigate("/cars")
+    }
+
     return (
         
         <div>
@@ -92,6 +96,7 @@ function Edit () {
                                     <td>
                                         <button className={"delete"} onClick={()=> handleDelete(detail)}>Delete</button>
                                     </td>
+                                    <td><button className={"back"} onClick={()=> handleBack()}>Back</button> </td>
                                 </tr>
                             </table>
 

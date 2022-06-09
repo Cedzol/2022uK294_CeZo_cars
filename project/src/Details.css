@@ -55,3 +55,29 @@
     color: black;
 }
 
+.back {
+    background-color: lightblue;
+    color: #282c34;
+    border: black;
+    min-width: 60px;
+    min-height: 30px;
+}
+
+.back:hover {
+    background-color: deepskyblue;
+    color: black;
+}
+
+.edit {
+    background-color: lightcoral;
+    color: #282c34;
+    border: black;
+    min-width: 60px;
+    min-height: 30px;
+}
+
+.edit:hover {
+    background-color: crimson;
+    color: black;
+}
+
