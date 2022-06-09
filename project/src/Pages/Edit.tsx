@@ -52,7 +52,7 @@ function Edit() {
             <div>
                 <PrimarySearchAppBar/>
             </div>
-            {detail == null || localStorage.getItem("log") != "true" ? null :
+            {detail == null || localStorage.getItem("log") != "true" ? <p>Try to reload or log in</p> :
                 <div>
                     <div className={"inlineCar"}>
                         <div className="editCard">

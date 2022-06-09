@@ -47,7 +47,7 @@ function CarDetail() {
             <div>
                 <PrimarySearchAppBar/>
             </div>
-            {detail == null ? null :
+            {detail == null ? <p>Try to reload or log in</p> :
                 <div>
                     <div className={"inlineCar"}>
                         <div className="detailCard">

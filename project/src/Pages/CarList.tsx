@@ -65,7 +65,7 @@ const CarList = () => {
                         </div>
                     : null}
             </div>
-            {carData.length == 0 ? <p>Try reloading or login in again</p> : null}
+            {carData.length == 0 ? <p>Try reloading or log in again</p> : null}
             {filteredData.map((car: Car, i: number) => {
                 return (<div className={"inlineCar"}>
                         <div className="card">
