@@ -34,17 +34,6 @@ const validateForm = (values: FormikValues) => {
         errors.Name = 'Please provide a name';
     }
 
-    if (!values.Miles_per_Gallon) {
-        errors.Miles_per_Gallon = 'Please provide mpg';
-    }
-    if (!values.Cylinders){
-        errors.Cylinders = "Please provide number of cylinders"
-    }
-
-    if (!values.Displacement){
-        errors.Displacement = "Please provide displacement"
-    }
-
     if (!values.Horsepower){
         errors.Horsepower = "Please provide horsepower"
     }
